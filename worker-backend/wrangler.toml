@@ -5,8 +5,8 @@ compatibility_date = "2024-01-01"
 # D1 Database binding
 [[d1_databases]]
 binding = "DB"
-database_name = "portfolio-db"
-database_id = "YOUR_DATABASE_ID_HERE"
+database_name = "azizulhakim"
+database_id = "ee2bba9d-c18e-49d3-8667-edc7d5c5ab13"
 
 # Workers AI binding (optional, for future use)
 # [ai]
