@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Admin model for authentication
+model Admin {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String   // hashed password
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Skills management
+model Skill {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  iconUrl     String   // URL to the icon
+  type        String   // 'image' or 'font-awesome'
+  color       String   // gradient color class
+  category    String   // 'Backend', 'Frontend', 'Database', 'Cloud', 'DevOps', 'Tooling', 'Design'
+  order       Int      @default(0) // for ordering
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Projects management
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  gradient    String   // gradient color class
+  projectUrl  String?  // external URL for the project
+  technologies String   // JSON array of technologies
+  featured    Boolean  @default(true) // whether it's featured on home page
+  order       Int      @default(0) // for ordering
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// About information management
+model AboutInfo {
+  id        String   @id @default(cuid())
+  key       String   @unique // e.g., 'bio', 'fullBio', 'additionalInfo'
+  value     String   // content
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Contact information management
+model ContactInfo {
+  id        String   @id @default(cuid())
+  key       String   @unique // e.g., 'email', 'github', 'linkedin', 'phone'
+  value     String   // content
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Messages from contact form
+model Message {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  read      Boolean  @default(false) // whether admin has read it
+  createdAt DateTime @default(now())
+}
